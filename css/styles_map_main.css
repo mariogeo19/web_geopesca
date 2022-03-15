@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#mapa_principal_nav {
+    height: 92vh;
+}
+
+.bienvenida_geopesca {
+    padding-top: 40px;
+}
+
+.container a {
+    text-decoration: none;
+}
+
+
+/*Estilos de la tabla del mapa principal*/
+.tabla-geopesca {
+    text-align:left;
+    border-collapse: collapse;
+    width: 100%;
+    }
+    
+.tabla-geopesca td{
+        padding: 10px, 5px, 10px, 5px;
+    }
+    
+.tabla-geopesca thead{
+        background-color: #235B4E;
+        border-bottom: 20px;
+        color: white;
+        text-align: center;
+        padding: 2em, 3px, 2px,3px;
+    }
+    
+.tabla-geopesca tr:nth-child(even){
+        background-color: #ddd;
+    }
+.tabla-geopesca tr:hover td {
+        background-color: #7B8DBD;
+        color: white;
+    }
+
+/*Quitar estilos al poput*/
+
+.leaflet-popup-content-wrapper {
+    background-color: #DDC9A3;
+}
+
+.leaflet-container {
+    font-size: 12px;
+    font-family: 'Montserrat';
+}

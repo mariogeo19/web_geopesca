@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 16px;
+}
+
+
+/*Imagen principal*/
+
+.fig_main {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.fig_main h2{
+    margin-bottom: 5px;
+}
+.fig_main p {
+    margin-bottom: 10px;
+}
+.fig_main a {
+    text-decoration: none;
+}
+
+.fig_main a:visited {
+    color: black;
+    text-decoration: none; 
+}
+
+.fig_main img {
+    width: 60%;
+}
+
+/*Instituciones colaboradoras*/
+.inst_colaboradoras {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.colaboradores {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 35px;
+    margin: 10px 0;
+}
+
+.colaboradores img{
+    width: 100%;
+    height: 150px;
+}
+
+.colaboradores h3 {
+    margin: 10px 0;
+}
+
+.colaboradores a {
+    padding: 10px 0;
+    font-weight: bold;
+    color: black;
+}
+
+.colaboradores a:hover {
+    text-decoration: underline;
+}
+
+/*Seccion descripcion tecnica de barcos*/
+.description_barcos {
+    padding-bottom: 30px;
+}
+.description_barcos a {
+    text-decoration: none;
+}
+.description_barcos a:visited {
+    color: black;
+    text-decoration: none; 
+}
+
+ /*MEDIAS QUERYS*/
+@media (max-width: 700px){
+    .colaboradores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px){
+    .colaboradores {
+        grid-template-columns: 1fr;
+    }
+}

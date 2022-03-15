@@ -1,0 +1,2134 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Geoportal del Golfo de California 2019-2021. Dr. Jorge Carranza Faser perteneciente al INAPESCA">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+
+         <!--PLUGINS ESTILOS DE LEAFLET-->
+         <link rel="stylesheet" href="../../lib/plugins/L.Control.MousePosition.css" type="text/css">
+
+         <!--ESTILOS DEL GOBIERNO-->
+         <link href="https://framework-gb.cdn.gob.mx/gm/v4/image/favicon.ico" rel="shortcut icon">
+ 
+         <!--ESTILOS PROPIO-->
+         <link rel="stylesheet" href="../../css/styles_map_qgis.css" type="text/css">
+         <style>
+             html, body, #map {
+                 padding: 0;
+                 margin: 0;
+             }
+             </style>
+             <title>Golfo de California</title>
+         </head>
+         <body>
+             <div class="navegacion">
+                 <a href="https://www.gob.mx/agricultura" target="_blank"><img class="logo-agricultura" src="../../fig/agricultura2.png" alt=" Logotipo de Agricultura"></a> 
+                  <ul>
+                     <li><a href="../../geopesca.html">Geoportal del INAPESCA (GEOPESCA) </a></li>
+                     <li><a href="../../index.html"> B/I Dr. Jorge Carranza Fraser </a></li>
+                  </ul>
+                 <a href="https://www.gob.mx/inapesca/" target="_blank"><img class="logo-inapesca" src="../../fig/inapesca2.png" alt=" Logotipo de Inapesca"></a> 
+              </div>
+         <div id="map">
+             <img class="paletas" src="../../fig/2019_2021_GC.svg" alt="Paletas de colores de variables ambientales">
+             
+         </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/RutanavegadaCentroGolfodeCalifornia2021_5.js"></script>
+        <script src="data/EnergaAcsticaCentrodelGolfodeCalifornia2021_6.js"></script>
+        <script src="data/LancesdepescaCentrodelGolfodeCalifornia2021_7.js"></script>
+        <script src="data/EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8.js"></script>
+        <script src="data/RutanavegadaGolfodeCalifornia2021_13.js"></script>
+        <script src="data/EnergaAcsticaGolfodeCalifornia2021_14.js"></script>
+        <script src="data/LancesdepescaGolfodeCalifornia2021_15.js"></script>
+        <script src="data/EstacionesOceanogrficasGolfodeCalifornia2021_16.js"></script>
+        <script src="data/RutanavegadaGolfodeCalifornia2020_21.js"></script>
+        <script src="data/EnergaAcsticaGolfodeCalifornia2020_22.js"></script>
+        <script src="data/LancesdepescaGolfodeCalifornia2020_23.js"></script>
+        <script src="data/EstacionesOceanogrficasGolfodeCalifornia2020_24.js"></script>
+        <script src="data/RutanavegadaIslasMaras2019_29.js"></script>
+        <script src="data/EnergaAcsticaIslasMaras2019_30.js"></script>
+        <script src="data/EstacionesOceanogrficasIslasMaras2019_31.js"></script>
+        <script src="data/RutanavegadaGolfodeCalifornia2019_36.js"></script>
+        <script src="data/EnergaAcsticaGolfodeCalifornia2019_37.js"></script>
+        <script src="data/LancesdepescaGolfodeCalifornia2019_38.js"></script>
+        <script src="data/EstacionesOceanogrficasGolfodeCalifornia2019_39.js"></script>
+        <script src="data/RutanavegadaSurdelGolfodeCalifornia2019_42.js"></script>
+        <script src="data/LancesdepescaSurdelGolfodeCalifornia2019_43.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:5
+        }).fitBounds([[26.28522737273919,-112.84956974298652],[28.714103782287214,-110.48022461798624]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_ESRISatellite_0');
+        map.getPane('pane_ESRISatellite_0').style.zIndex = 400;
+        var layer_ESRISatellite_0 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_ESRISatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_ESRISatellite_0;
+        map.addLayer(layer_ESRISatellite_0);
+        map.createPane('pane_ClorofilaaCentrodelGolfodeCalifornia2021_1');
+        map.getPane('pane_ClorofilaaCentrodelGolfodeCalifornia2021_1').style.zIndex = 401;
+        var img_ClorofilaaCentrodelGolfodeCalifornia2021_1 = 'data/ClorofilaaCentrodelGolfodeCalifornia2021_1.png';
+        var img_bounds_ClorofilaaCentrodelGolfodeCalifornia2021_1 = [[27.095747088687045,-112.31839258432896],[28.144387088687047,-110.95456258432895]];
+        var layer_ClorofilaaCentrodelGolfodeCalifornia2021_1 = new L.imageOverlay(img_ClorofilaaCentrodelGolfodeCalifornia2021_1,
+                                              img_bounds_ClorofilaaCentrodelGolfodeCalifornia2021_1,
+                                              {pane: 'pane_ClorofilaaCentrodelGolfodeCalifornia2021_1'});
+        bounds_group.addLayer(layer_ClorofilaaCentrodelGolfodeCalifornia2021_1);
+        map.addLayer(layer_ClorofilaaCentrodelGolfodeCalifornia2021_1);
+        map.createPane('pane_OxgenoCentrodelGolfodeCalifornia2021_2');
+        map.getPane('pane_OxgenoCentrodelGolfodeCalifornia2021_2').style.zIndex = 402;
+        var img_OxgenoCentrodelGolfodeCalifornia2021_2 = 'data/OxgenoCentrodelGolfodeCalifornia2021_2.png';
+        var img_bounds_OxgenoCentrodelGolfodeCalifornia2021_2 = [[27.22912536728631,-112.41426221100443],[28.213395367286314,-111.09116221100443]];
+        var layer_OxgenoCentrodelGolfodeCalifornia2021_2 = new L.imageOverlay(img_OxgenoCentrodelGolfodeCalifornia2021_2,
+                                              img_bounds_OxgenoCentrodelGolfodeCalifornia2021_2,
+                                              {pane: 'pane_OxgenoCentrodelGolfodeCalifornia2021_2'});
+        bounds_group.addLayer(layer_OxgenoCentrodelGolfodeCalifornia2021_2);
+        map.addLayer(layer_OxgenoCentrodelGolfodeCalifornia2021_2);
+        map.createPane('pane_SalinidadCentrodelGolfodeCalifornia2021_3');
+        map.getPane('pane_SalinidadCentrodelGolfodeCalifornia2021_3').style.zIndex = 403;
+        var img_SalinidadCentrodelGolfodeCalifornia2021_3 = 'data/SalinidadCentrodelGolfodeCalifornia2021_3.png';
+        var img_bounds_SalinidadCentrodelGolfodeCalifornia2021_3 = [[27.095747088687045,-112.31839258432896],[28.144387088687047,-110.95456258432895]];
+        var layer_SalinidadCentrodelGolfodeCalifornia2021_3 = new L.imageOverlay(img_SalinidadCentrodelGolfodeCalifornia2021_3,
+                                              img_bounds_SalinidadCentrodelGolfodeCalifornia2021_3,
+                                              {pane: 'pane_SalinidadCentrodelGolfodeCalifornia2021_3'});
+        bounds_group.addLayer(layer_SalinidadCentrodelGolfodeCalifornia2021_3);
+        map.addLayer(layer_SalinidadCentrodelGolfodeCalifornia2021_3);
+        map.createPane('pane_TemperaturaCentrodelGolfodeCalifornia2021_4');
+        map.getPane('pane_TemperaturaCentrodelGolfodeCalifornia2021_4').style.zIndex = 404;
+        var img_TemperaturaCentrodelGolfodeCalifornia2021_4 = 'data/TemperaturaCentrodelGolfodeCalifornia2021_4.png';
+        var img_bounds_TemperaturaCentrodelGolfodeCalifornia2021_4 = [[27.095747088687045,-112.31839258432896],[28.144387088687047,-110.95456258432895]];
+        var layer_TemperaturaCentrodelGolfodeCalifornia2021_4 = new L.imageOverlay(img_TemperaturaCentrodelGolfodeCalifornia2021_4,
+                                              img_bounds_TemperaturaCentrodelGolfodeCalifornia2021_4,
+                                              {pane: 'pane_TemperaturaCentrodelGolfodeCalifornia2021_4'});
+        bounds_group.addLayer(layer_TemperaturaCentrodelGolfodeCalifornia2021_4);
+        map.addLayer(layer_TemperaturaCentrodelGolfodeCalifornia2021_4);
+        function pop_RutanavegadaCentroGolfodeCalifornia2021_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaCentroGolfodeCalifornia2021_5_0() {
+            return {
+                pane: 'pane_RutanavegadaCentroGolfodeCalifornia2021_5',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaCentroGolfodeCalifornia2021_5');
+        map.getPane('pane_RutanavegadaCentroGolfodeCalifornia2021_5').style.zIndex = 405;
+        map.getPane('pane_RutanavegadaCentroGolfodeCalifornia2021_5').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaCentroGolfodeCalifornia2021_5 = new L.geoJson(json_RutanavegadaCentroGolfodeCalifornia2021_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaCentroGolfodeCalifornia2021_5',
+            layerName: 'layer_RutanavegadaCentroGolfodeCalifornia2021_5',
+            pane: 'pane_RutanavegadaCentroGolfodeCalifornia2021_5',
+            onEachFeature: pop_RutanavegadaCentroGolfodeCalifornia2021_5,
+            style: style_RutanavegadaCentroGolfodeCalifornia2021_5_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaCentroGolfodeCalifornia2021_5);
+        map.addLayer(layer_RutanavegadaCentroGolfodeCalifornia2021_5);
+        function pop_EnergaAcsticaCentrodelGolfodeCalifornia2021_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time'] !== null ? autolinker.link(feature.properties['time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cruise'] !== null ? autolinker.link(feature.properties['cruise'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sum_nasc'] !== null ? autolinker.link(feature.properties['sum_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mean_nasc'] !== null ? autolinker.link(feature.properties['mean_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['species'] !== null ? autolinker.link(feature.properties['species'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['template'] !== null ? autolinker.link(feature.properties['template'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnergaAcsticaCentrodelGolfodeCalifornia2021_6_0(feature) {
+            if (feature.properties['sum_nasc'] >= 0.000000 && feature.properties['sum_nasc'] <= 50.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+                radius: 1.0,
+                opacity: 1,
+                color: 'rgba(31,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50.000000 && feature.properties['sum_nasc'] <= 500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,197,255,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 500.000000 && feature.properties['sum_nasc'] <= 2500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 2500.000000 && feature.properties['sum_nasc'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 5000.000000 && feature.properties['sum_nasc'] <= 9116.180000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+                radius: 9.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6');
+        map.getPane('pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6').style.zIndex = 406;
+        map.getPane('pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6').style['mix-blend-mode'] = 'normal';
+        var layer_EnergaAcsticaCentrodelGolfodeCalifornia2021_6 = new L.geoJson(json_EnergaAcsticaCentrodelGolfodeCalifornia2021_6, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+            layerName: 'layer_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+            pane: 'pane_EnergaAcsticaCentrodelGolfodeCalifornia2021_6',
+            onEachFeature: pop_EnergaAcsticaCentrodelGolfodeCalifornia2021_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EnergaAcsticaCentrodelGolfodeCalifornia2021_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EnergaAcsticaCentrodelGolfodeCalifornia2021_6);
+        map.addLayer(layer_EnergaAcsticaCentrodelGolfodeCalifornia2021_6);
+        function pop_LancesdepescaCentrodelGolfodeCalifornia2021_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lance</th>\
+                        <td>' + (feature.properties['Lance'] !== null ? autolinker.link(feature.properties['Lance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LancesdepescaCentrodelGolfodeCalifornia2021_7_0() {
+            return {
+                pane: 'pane_LancesdepescaCentrodelGolfodeCalifornia2021_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LancesdepescaCentrodelGolfodeCalifornia2021_7');
+        map.getPane('pane_LancesdepescaCentrodelGolfodeCalifornia2021_7').style.zIndex = 407;
+        map.getPane('pane_LancesdepescaCentrodelGolfodeCalifornia2021_7').style['mix-blend-mode'] = 'normal';
+        var layer_LancesdepescaCentrodelGolfodeCalifornia2021_7 = new L.geoJson(json_LancesdepescaCentrodelGolfodeCalifornia2021_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LancesdepescaCentrodelGolfodeCalifornia2021_7',
+            layerName: 'layer_LancesdepescaCentrodelGolfodeCalifornia2021_7',
+            pane: 'pane_LancesdepescaCentrodelGolfodeCalifornia2021_7',
+            onEachFeature: pop_LancesdepescaCentrodelGolfodeCalifornia2021_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LancesdepescaCentrodelGolfodeCalifornia2021_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LancesdepescaCentrodelGolfodeCalifornia2021_7);
+        map.addLayer(layer_LancesdepescaCentrodelGolfodeCalifornia2021_7);
+        function pop_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Estación</th>\
+                        <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8_0() {
+            return {
+                pane: 'pane_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,105,166,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8');
+        map.getPane('pane_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8').style.zIndex = 408;
+        map.getPane('pane_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8 = new L.geoJson(json_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8',
+            layerName: 'layer_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8',
+            pane: 'pane_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8',
+            onEachFeature: pop_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8);
+        map.addLayer(layer_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8);
+        map.createPane('pane_ClorofilaaGolfodeCalifornia2021_9');
+        map.getPane('pane_ClorofilaaGolfodeCalifornia2021_9').style.zIndex = 409;
+        var img_ClorofilaaGolfodeCalifornia2021_9 = 'data/ClorofilaaGolfodeCalifornia2021_9.png';
+        var img_bounds_ClorofilaaGolfodeCalifornia2021_9 = [[22.585791966107365,-114.5589639688057],[31.137631966107364,-106.02446396880569]];
+        var layer_ClorofilaaGolfodeCalifornia2021_9 = new L.imageOverlay(img_ClorofilaaGolfodeCalifornia2021_9,
+                                              img_bounds_ClorofilaaGolfodeCalifornia2021_9,
+                                              {pane: 'pane_ClorofilaaGolfodeCalifornia2021_9'});
+        bounds_group.addLayer(layer_ClorofilaaGolfodeCalifornia2021_9);
+        map.addLayer(layer_ClorofilaaGolfodeCalifornia2021_9);
+        map.createPane('pane_OxgenoGolfodeCalifornia2021_10');
+        map.getPane('pane_OxgenoGolfodeCalifornia2021_10').style.zIndex = 410;
+        var img_OxgenoGolfodeCalifornia2021_10 = 'data/OxgenoGolfodeCalifornia2021_10.png';
+        var img_bounds_OxgenoGolfodeCalifornia2021_10 = [[22.594828073,-114.558964206],[31.128588073,-106.034564206]];
+        var layer_OxgenoGolfodeCalifornia2021_10 = new L.imageOverlay(img_OxgenoGolfodeCalifornia2021_10,
+                                              img_bounds_OxgenoGolfodeCalifornia2021_10,
+                                              {pane: 'pane_OxgenoGolfodeCalifornia2021_10'});
+        bounds_group.addLayer(layer_OxgenoGolfodeCalifornia2021_10);
+        map.addLayer(layer_OxgenoGolfodeCalifornia2021_10);
+        map.createPane('pane_SalinidadGolfodeCalifornia2021_11');
+        map.getPane('pane_SalinidadGolfodeCalifornia2021_11').style.zIndex = 411;
+        var img_SalinidadGolfodeCalifornia2021_11 = 'data/SalinidadGolfodeCalifornia2021_11.png';
+        var img_bounds_SalinidadGolfodeCalifornia2021_11 = [[22.585791966107365,-114.5589639688057],[31.137631966107364,-106.02446396880569]];
+        var layer_SalinidadGolfodeCalifornia2021_11 = new L.imageOverlay(img_SalinidadGolfodeCalifornia2021_11,
+                                              img_bounds_SalinidadGolfodeCalifornia2021_11,
+                                              {pane: 'pane_SalinidadGolfodeCalifornia2021_11'});
+        bounds_group.addLayer(layer_SalinidadGolfodeCalifornia2021_11);
+        map.addLayer(layer_SalinidadGolfodeCalifornia2021_11);
+        map.createPane('pane_TemperaturaGolfodeCalifornia2021_12');
+        map.getPane('pane_TemperaturaGolfodeCalifornia2021_12').style.zIndex = 412;
+        var img_TemperaturaGolfodeCalifornia2021_12 = 'data/TemperaturaGolfodeCalifornia2021_12.png';
+        var img_bounds_TemperaturaGolfodeCalifornia2021_12 = [[22.585791966107365,-114.5589639688057],[31.137631966107364,-106.02446396880569]];
+        var layer_TemperaturaGolfodeCalifornia2021_12 = new L.imageOverlay(img_TemperaturaGolfodeCalifornia2021_12,
+                                              img_bounds_TemperaturaGolfodeCalifornia2021_12,
+                                              {pane: 'pane_TemperaturaGolfodeCalifornia2021_12'});
+        bounds_group.addLayer(layer_TemperaturaGolfodeCalifornia2021_12);
+        map.addLayer(layer_TemperaturaGolfodeCalifornia2021_12);
+        function pop_RutanavegadaGolfodeCalifornia2021_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaGolfodeCalifornia2021_13_0() {
+            return {
+                pane: 'pane_RutanavegadaGolfodeCalifornia2021_13',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaGolfodeCalifornia2021_13');
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2021_13').style.zIndex = 413;
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2021_13').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaGolfodeCalifornia2021_13 = new L.geoJson(json_RutanavegadaGolfodeCalifornia2021_13, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaGolfodeCalifornia2021_13',
+            layerName: 'layer_RutanavegadaGolfodeCalifornia2021_13',
+            pane: 'pane_RutanavegadaGolfodeCalifornia2021_13',
+            onEachFeature: pop_RutanavegadaGolfodeCalifornia2021_13,
+            style: style_RutanavegadaGolfodeCalifornia2021_13_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaGolfodeCalifornia2021_13);
+        map.addLayer(layer_RutanavegadaGolfodeCalifornia2021_13);
+        function pop_EnergaAcsticaGolfodeCalifornia2021_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time'] !== null ? autolinker.link(feature.properties['time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cruise'] !== null ? autolinker.link(feature.properties['cruise'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sum_nasc'] !== null ? autolinker.link(feature.properties['sum_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mean_nasc'] !== null ? autolinker.link(feature.properties['mean_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['species'] !== null ? autolinker.link(feature.properties['species'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['template'] !== null ? autolinker.link(feature.properties['template'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnergaAcsticaGolfodeCalifornia2021_14_0(feature) {
+            if (feature.properties['sum_nasc'] >= 0.000000 && feature.properties['sum_nasc'] <= 50.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 1.0,
+                opacity: 1,
+                color: 'rgba(31,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50.000000 && feature.properties['sum_nasc'] <= 500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,197,255,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 500.000000 && feature.properties['sum_nasc'] <= 2500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 2500.000000 && feature.properties['sum_nasc'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 5000.000000 && feature.properties['sum_nasc'] <= 20000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 9.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 20000.000000 && feature.properties['sum_nasc'] <= 50000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 11.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,190,190,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50000.000000 && feature.properties['sum_nasc'] <= 63512.960000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+                radius: 13.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_EnergaAcsticaGolfodeCalifornia2021_14');
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2021_14').style.zIndex = 414;
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2021_14').style['mix-blend-mode'] = 'normal';
+        var layer_EnergaAcsticaGolfodeCalifornia2021_14 = new L.geoJson(json_EnergaAcsticaGolfodeCalifornia2021_14, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EnergaAcsticaGolfodeCalifornia2021_14',
+            layerName: 'layer_EnergaAcsticaGolfodeCalifornia2021_14',
+            pane: 'pane_EnergaAcsticaGolfodeCalifornia2021_14',
+            onEachFeature: pop_EnergaAcsticaGolfodeCalifornia2021_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EnergaAcsticaGolfodeCalifornia2021_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EnergaAcsticaGolfodeCalifornia2021_14);
+        map.addLayer(layer_EnergaAcsticaGolfodeCalifornia2021_14);
+        function pop_LancesdepescaGolfodeCalifornia2021_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lance</th>\
+                        <td>' + (feature.properties['Lance'] !== null ? autolinker.link(feature.properties['Lance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LancesdepescaGolfodeCalifornia2021_15_0() {
+            return {
+                pane: 'pane_LancesdepescaGolfodeCalifornia2021_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LancesdepescaGolfodeCalifornia2021_15');
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2021_15').style.zIndex = 415;
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2021_15').style['mix-blend-mode'] = 'normal';
+        var layer_LancesdepescaGolfodeCalifornia2021_15 = new L.geoJson(json_LancesdepescaGolfodeCalifornia2021_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LancesdepescaGolfodeCalifornia2021_15',
+            layerName: 'layer_LancesdepescaGolfodeCalifornia2021_15',
+            pane: 'pane_LancesdepescaGolfodeCalifornia2021_15',
+            onEachFeature: pop_LancesdepescaGolfodeCalifornia2021_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LancesdepescaGolfodeCalifornia2021_15_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LancesdepescaGolfodeCalifornia2021_15);
+        map.addLayer(layer_LancesdepescaGolfodeCalifornia2021_15);
+        function pop_EstacionesOceanogrficasGolfodeCalifornia2021_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Estación</th>\
+                        <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesOceanogrficasGolfodeCalifornia2021_16_0() {
+            return {
+                pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2021_16',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,105,166,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesOceanogrficasGolfodeCalifornia2021_16');
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2021_16').style.zIndex = 416;
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2021_16').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesOceanogrficasGolfodeCalifornia2021_16 = new L.geoJson(json_EstacionesOceanogrficasGolfodeCalifornia2021_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesOceanogrficasGolfodeCalifornia2021_16',
+            layerName: 'layer_EstacionesOceanogrficasGolfodeCalifornia2021_16',
+            pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2021_16',
+            onEachFeature: pop_EstacionesOceanogrficasGolfodeCalifornia2021_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesOceanogrficasGolfodeCalifornia2021_16_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2021_16);
+        map.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2021_16);
+        map.createPane('pane_ClorofilaaGolfodeCalifornia2020_17');
+        map.getPane('pane_ClorofilaaGolfodeCalifornia2020_17').style.zIndex = 417;
+        var img_ClorofilaaGolfodeCalifornia2020_17 = 'data/ClorofilaaGolfodeCalifornia2020_17.png';
+        var img_bounds_ClorofilaaGolfodeCalifornia2020_17 = [[21.575554459382634,-110.13139790242553],[25.974504459382633,-105.75355790242553]];
+        var layer_ClorofilaaGolfodeCalifornia2020_17 = new L.imageOverlay(img_ClorofilaaGolfodeCalifornia2020_17,
+                                              img_bounds_ClorofilaaGolfodeCalifornia2020_17,
+                                              {pane: 'pane_ClorofilaaGolfodeCalifornia2020_17'});
+        bounds_group.addLayer(layer_ClorofilaaGolfodeCalifornia2020_17);
+        map.addLayer(layer_ClorofilaaGolfodeCalifornia2020_17);
+        map.createPane('pane_OxgenoGolfodeCalifornia2020_18');
+        map.getPane('pane_OxgenoGolfodeCalifornia2020_18').style.zIndex = 418;
+        var img_OxgenoGolfodeCalifornia2020_18 = 'data/OxgenoGolfodeCalifornia2020_18.png';
+        var img_bounds_OxgenoGolfodeCalifornia2020_18 = [[21.442884744,-110.148549536],[26.108337283,-105.756197568]];
+        var layer_OxgenoGolfodeCalifornia2020_18 = new L.imageOverlay(img_OxgenoGolfodeCalifornia2020_18,
+                                              img_bounds_OxgenoGolfodeCalifornia2020_18,
+                                              {pane: 'pane_OxgenoGolfodeCalifornia2020_18'});
+        bounds_group.addLayer(layer_OxgenoGolfodeCalifornia2020_18);
+        map.addLayer(layer_OxgenoGolfodeCalifornia2020_18);
+        map.createPane('pane_SalinidadGolfodeCalifornia2020_19');
+        map.getPane('pane_SalinidadGolfodeCalifornia2020_19').style.zIndex = 419;
+        var img_SalinidadGolfodeCalifornia2020_19 = 'data/SalinidadGolfodeCalifornia2020_19.png';
+        var img_bounds_SalinidadGolfodeCalifornia2020_19 = [[21.575554459382634,-110.13139790242553],[25.974504459382633,-105.75355790242553]];
+        var layer_SalinidadGolfodeCalifornia2020_19 = new L.imageOverlay(img_SalinidadGolfodeCalifornia2020_19,
+                                              img_bounds_SalinidadGolfodeCalifornia2020_19,
+                                              {pane: 'pane_SalinidadGolfodeCalifornia2020_19'});
+        bounds_group.addLayer(layer_SalinidadGolfodeCalifornia2020_19);
+        map.addLayer(layer_SalinidadGolfodeCalifornia2020_19);
+        map.createPane('pane_TemperaturaGolfodeCalifornia2020_20');
+        map.getPane('pane_TemperaturaGolfodeCalifornia2020_20').style.zIndex = 420;
+        var img_TemperaturaGolfodeCalifornia2020_20 = 'data/TemperaturaGolfodeCalifornia2020_20.png';
+        var img_bounds_TemperaturaGolfodeCalifornia2020_20 = [[21.575554459382634,-110.13139790242553],[25.974504459382633,-105.75355790242553]];
+        var layer_TemperaturaGolfodeCalifornia2020_20 = new L.imageOverlay(img_TemperaturaGolfodeCalifornia2020_20,
+                                              img_bounds_TemperaturaGolfodeCalifornia2020_20,
+                                              {pane: 'pane_TemperaturaGolfodeCalifornia2020_20'});
+        bounds_group.addLayer(layer_TemperaturaGolfodeCalifornia2020_20);
+        map.addLayer(layer_TemperaturaGolfodeCalifornia2020_20);
+        function pop_RutanavegadaGolfodeCalifornia2020_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaGolfodeCalifornia2020_21_0() {
+            return {
+                pane: 'pane_RutanavegadaGolfodeCalifornia2020_21',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaGolfodeCalifornia2020_21');
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2020_21').style.zIndex = 421;
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2020_21').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaGolfodeCalifornia2020_21 = new L.geoJson(json_RutanavegadaGolfodeCalifornia2020_21, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaGolfodeCalifornia2020_21',
+            layerName: 'layer_RutanavegadaGolfodeCalifornia2020_21',
+            pane: 'pane_RutanavegadaGolfodeCalifornia2020_21',
+            onEachFeature: pop_RutanavegadaGolfodeCalifornia2020_21,
+            style: style_RutanavegadaGolfodeCalifornia2020_21_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaGolfodeCalifornia2020_21);
+        map.addLayer(layer_RutanavegadaGolfodeCalifornia2020_21);
+        function pop_EnergaAcsticaGolfodeCalifornia2020_22(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time'] !== null ? autolinker.link(feature.properties['time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cruise'] !== null ? autolinker.link(feature.properties['cruise'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sum_nasc'] !== null ? autolinker.link(feature.properties['sum_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mean_nasc'] !== null ? autolinker.link(feature.properties['mean_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['species'] !== null ? autolinker.link(feature.properties['species'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['template'] !== null ? autolinker.link(feature.properties['template'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnergaAcsticaGolfodeCalifornia2020_22_0(feature) {
+            if (feature.properties['sum_nasc'] >= 0.000000 && feature.properties['sum_nasc'] <= 50.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 1.0,
+                opacity: 1,
+                color: 'rgba(31,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50.000000 && feature.properties['sum_nasc'] <= 500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,197,255,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 500.000000 && feature.properties['sum_nasc'] <= 2500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 2500.000000 && feature.properties['sum_nasc'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 5000.000000 && feature.properties['sum_nasc'] <= 20000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 9.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 20000.000000 && feature.properties['sum_nasc'] <= 39574.450000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+                radius: 11.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,190,190,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_EnergaAcsticaGolfodeCalifornia2020_22');
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2020_22').style.zIndex = 422;
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2020_22').style['mix-blend-mode'] = 'normal';
+        var layer_EnergaAcsticaGolfodeCalifornia2020_22 = new L.geoJson(json_EnergaAcsticaGolfodeCalifornia2020_22, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EnergaAcsticaGolfodeCalifornia2020_22',
+            layerName: 'layer_EnergaAcsticaGolfodeCalifornia2020_22',
+            pane: 'pane_EnergaAcsticaGolfodeCalifornia2020_22',
+            onEachFeature: pop_EnergaAcsticaGolfodeCalifornia2020_22,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EnergaAcsticaGolfodeCalifornia2020_22_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EnergaAcsticaGolfodeCalifornia2020_22);
+        map.addLayer(layer_EnergaAcsticaGolfodeCalifornia2020_22);
+        function pop_LancesdepescaGolfodeCalifornia2020_23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lance</th>\
+                        <td>' + (feature.properties['Lance'] !== null ? autolinker.link(feature.properties['Lance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LancesdepescaGolfodeCalifornia2020_23_0() {
+            return {
+                pane: 'pane_LancesdepescaGolfodeCalifornia2020_23',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LancesdepescaGolfodeCalifornia2020_23');
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2020_23').style.zIndex = 423;
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2020_23').style['mix-blend-mode'] = 'normal';
+        var layer_LancesdepescaGolfodeCalifornia2020_23 = new L.geoJson(json_LancesdepescaGolfodeCalifornia2020_23, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LancesdepescaGolfodeCalifornia2020_23',
+            layerName: 'layer_LancesdepescaGolfodeCalifornia2020_23',
+            pane: 'pane_LancesdepescaGolfodeCalifornia2020_23',
+            onEachFeature: pop_LancesdepescaGolfodeCalifornia2020_23,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LancesdepescaGolfodeCalifornia2020_23_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LancesdepescaGolfodeCalifornia2020_23);
+        map.addLayer(layer_LancesdepescaGolfodeCalifornia2020_23);
+        function pop_EstacionesOceanogrficasGolfodeCalifornia2020_24(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Estación</th>\
+                        <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesOceanogrficasGolfodeCalifornia2020_24_0() {
+            return {
+                pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2020_24',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,105,166,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesOceanogrficasGolfodeCalifornia2020_24');
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2020_24').style.zIndex = 424;
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2020_24').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesOceanogrficasGolfodeCalifornia2020_24 = new L.geoJson(json_EstacionesOceanogrficasGolfodeCalifornia2020_24, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesOceanogrficasGolfodeCalifornia2020_24',
+            layerName: 'layer_EstacionesOceanogrficasGolfodeCalifornia2020_24',
+            pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2020_24',
+            onEachFeature: pop_EstacionesOceanogrficasGolfodeCalifornia2020_24,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesOceanogrficasGolfodeCalifornia2020_24_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2020_24);
+        map.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2020_24);
+        map.createPane('pane_ClorofilaaIslasMaras2019_25');
+        map.getPane('pane_ClorofilaaIslasMaras2019_25').style.zIndex = 425;
+        var img_ClorofilaaIslasMaras2019_25 = 'data/ClorofilaaIslasMaras2019_25.png';
+        var img_bounds_ClorofilaaIslasMaras2019_25 = [[21.15081,-106.83287],[21.90377,-106.07821]];
+        var layer_ClorofilaaIslasMaras2019_25 = new L.imageOverlay(img_ClorofilaaIslasMaras2019_25,
+                                              img_bounds_ClorofilaaIslasMaras2019_25,
+                                              {pane: 'pane_ClorofilaaIslasMaras2019_25'});
+        bounds_group.addLayer(layer_ClorofilaaIslasMaras2019_25);
+        map.addLayer(layer_ClorofilaaIslasMaras2019_25);
+        map.createPane('pane_OxgenoIslasMaras2019_26');
+        map.getPane('pane_OxgenoIslasMaras2019_26').style.zIndex = 426;
+        var img_OxgenoIslasMaras2019_26 = 'data/OxgenoIslasMaras2019_26.png';
+        var img_bounds_OxgenoIslasMaras2019_26 = [[21.15080901420447,-106.83287058398496],[21.90376901420447,-106.07821058398495]];
+        var layer_OxgenoIslasMaras2019_26 = new L.imageOverlay(img_OxgenoIslasMaras2019_26,
+                                              img_bounds_OxgenoIslasMaras2019_26,
+                                              {pane: 'pane_OxgenoIslasMaras2019_26'});
+        bounds_group.addLayer(layer_OxgenoIslasMaras2019_26);
+        map.addLayer(layer_OxgenoIslasMaras2019_26);
+        map.createPane('pane_SalinidadIslasMaras2019_27');
+        map.getPane('pane_SalinidadIslasMaras2019_27').style.zIndex = 427;
+        var img_SalinidadIslasMaras2019_27 = 'data/SalinidadIslasMaras2019_27.png';
+        var img_bounds_SalinidadIslasMaras2019_27 = [[21.15080901420447,-106.83287058398496],[21.90376901420447,-106.07821058398495]];
+        var layer_SalinidadIslasMaras2019_27 = new L.imageOverlay(img_SalinidadIslasMaras2019_27,
+                                              img_bounds_SalinidadIslasMaras2019_27,
+                                              {pane: 'pane_SalinidadIslasMaras2019_27'});
+        bounds_group.addLayer(layer_SalinidadIslasMaras2019_27);
+        map.addLayer(layer_SalinidadIslasMaras2019_27);
+        map.createPane('pane_TemperaturaIslasMaras2019_28');
+        map.getPane('pane_TemperaturaIslasMaras2019_28').style.zIndex = 428;
+        var img_TemperaturaIslasMaras2019_28 = 'data/TemperaturaIslasMaras2019_28.png';
+        var img_bounds_TemperaturaIslasMaras2019_28 = [[21.15080901420447,-106.83287058398496],[21.90376901420447,-106.07821058398495]];
+        var layer_TemperaturaIslasMaras2019_28 = new L.imageOverlay(img_TemperaturaIslasMaras2019_28,
+                                              img_bounds_TemperaturaIslasMaras2019_28,
+                                              {pane: 'pane_TemperaturaIslasMaras2019_28'});
+        bounds_group.addLayer(layer_TemperaturaIslasMaras2019_28);
+        map.addLayer(layer_TemperaturaIslasMaras2019_28);
+        function pop_RutanavegadaIslasMaras2019_29(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaIslasMaras2019_29_0() {
+            return {
+                pane: 'pane_RutanavegadaIslasMaras2019_29',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaIslasMaras2019_29');
+        map.getPane('pane_RutanavegadaIslasMaras2019_29').style.zIndex = 429;
+        map.getPane('pane_RutanavegadaIslasMaras2019_29').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaIslasMaras2019_29 = new L.geoJson(json_RutanavegadaIslasMaras2019_29, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaIslasMaras2019_29',
+            layerName: 'layer_RutanavegadaIslasMaras2019_29',
+            pane: 'pane_RutanavegadaIslasMaras2019_29',
+            onEachFeature: pop_RutanavegadaIslasMaras2019_29,
+            style: style_RutanavegadaIslasMaras2019_29_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaIslasMaras2019_29);
+        map.addLayer(layer_RutanavegadaIslasMaras2019_29);
+        function pop_EnergaAcsticaIslasMaras2019_30(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time'] !== null ? autolinker.link(feature.properties['time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cruise'] !== null ? autolinker.link(feature.properties['cruise'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sum_nasc'] !== null ? autolinker.link(feature.properties['sum_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mean_nasc'] !== null ? autolinker.link(feature.properties['mean_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['species'] !== null ? autolinker.link(feature.properties['species'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['template'] !== null ? autolinker.link(feature.properties['template'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnergaAcsticaIslasMaras2019_30_0(feature) {
+            if (feature.properties['sum_nasc'] >= 0.000000 && feature.properties['sum_nasc'] <= 50.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+                radius: 1.0,
+                opacity: 1,
+                color: 'rgba(31,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50.000000 && feature.properties['sum_nasc'] <= 500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,197,255,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 500.000000 && feature.properties['sum_nasc'] <= 2500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 2500.000000 && feature.properties['sum_nasc'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 5000.000000 && feature.properties['sum_nasc'] <= 17354.960000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+                radius: 9.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_EnergaAcsticaIslasMaras2019_30');
+        map.getPane('pane_EnergaAcsticaIslasMaras2019_30').style.zIndex = 430;
+        map.getPane('pane_EnergaAcsticaIslasMaras2019_30').style['mix-blend-mode'] = 'normal';
+        var layer_EnergaAcsticaIslasMaras2019_30 = new L.geoJson(json_EnergaAcsticaIslasMaras2019_30, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EnergaAcsticaIslasMaras2019_30',
+            layerName: 'layer_EnergaAcsticaIslasMaras2019_30',
+            pane: 'pane_EnergaAcsticaIslasMaras2019_30',
+            onEachFeature: pop_EnergaAcsticaIslasMaras2019_30,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EnergaAcsticaIslasMaras2019_30_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EnergaAcsticaIslasMaras2019_30);
+        map.addLayer(layer_EnergaAcsticaIslasMaras2019_30);
+        function pop_EstacionesOceanogrficasIslasMaras2019_31(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Estación</th>\
+                        <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesOceanogrficasIslasMaras2019_31_0() {
+            return {
+                pane: 'pane_EstacionesOceanogrficasIslasMaras2019_31',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,105,166,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesOceanogrficasIslasMaras2019_31');
+        map.getPane('pane_EstacionesOceanogrficasIslasMaras2019_31').style.zIndex = 431;
+        map.getPane('pane_EstacionesOceanogrficasIslasMaras2019_31').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesOceanogrficasIslasMaras2019_31 = new L.geoJson(json_EstacionesOceanogrficasIslasMaras2019_31, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesOceanogrficasIslasMaras2019_31',
+            layerName: 'layer_EstacionesOceanogrficasIslasMaras2019_31',
+            pane: 'pane_EstacionesOceanogrficasIslasMaras2019_31',
+            onEachFeature: pop_EstacionesOceanogrficasIslasMaras2019_31,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesOceanogrficasIslasMaras2019_31_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesOceanogrficasIslasMaras2019_31);
+        map.addLayer(layer_EstacionesOceanogrficasIslasMaras2019_31);
+        map.createPane('pane_ClorofilaaGolfodeCalifornia2019_32');
+        map.getPane('pane_ClorofilaaGolfodeCalifornia2019_32').style.zIndex = 432;
+        var img_ClorofilaaGolfodeCalifornia2019_32 = 'data/ClorofilaaGolfodeCalifornia2019_32.png';
+        var img_bounds_ClorofilaaGolfodeCalifornia2019_32 = [[21.5625,-112.1125],[27.9125,-105.7125]];
+        var layer_ClorofilaaGolfodeCalifornia2019_32 = new L.imageOverlay(img_ClorofilaaGolfodeCalifornia2019_32,
+                                              img_bounds_ClorofilaaGolfodeCalifornia2019_32,
+                                              {pane: 'pane_ClorofilaaGolfodeCalifornia2019_32'});
+        bounds_group.addLayer(layer_ClorofilaaGolfodeCalifornia2019_32);
+        map.addLayer(layer_ClorofilaaGolfodeCalifornia2019_32);
+        map.createPane('pane_OxgenoGolfodeCalifornia2019_33');
+        map.getPane('pane_OxgenoGolfodeCalifornia2019_33').style.zIndex = 433;
+        var img_OxgenoGolfodeCalifornia2019_33 = 'data/OxgenoGolfodeCalifornia2019_33.png';
+        var img_bounds_OxgenoGolfodeCalifornia2019_33 = [[21.248611494542228,-112.21706488820153],[28.170451494542228,-105.65333488820154]];
+        var layer_OxgenoGolfodeCalifornia2019_33 = new L.imageOverlay(img_OxgenoGolfodeCalifornia2019_33,
+                                              img_bounds_OxgenoGolfodeCalifornia2019_33,
+                                              {pane: 'pane_OxgenoGolfodeCalifornia2019_33'});
+        bounds_group.addLayer(layer_OxgenoGolfodeCalifornia2019_33);
+        map.addLayer(layer_OxgenoGolfodeCalifornia2019_33);
+        map.createPane('pane_SalinidadGolfodeCalifornia2019_34');
+        map.getPane('pane_SalinidadGolfodeCalifornia2019_34').style.zIndex = 434;
+        var img_SalinidadGolfodeCalifornia2019_34 = 'data/SalinidadGolfodeCalifornia2019_34.png';
+        var img_bounds_SalinidadGolfodeCalifornia2019_34 = [[21.248611494542228,-112.21706488820153],[28.170451494542228,-105.65333488820154]];
+        var layer_SalinidadGolfodeCalifornia2019_34 = new L.imageOverlay(img_SalinidadGolfodeCalifornia2019_34,
+                                              img_bounds_SalinidadGolfodeCalifornia2019_34,
+                                              {pane: 'pane_SalinidadGolfodeCalifornia2019_34'});
+        bounds_group.addLayer(layer_SalinidadGolfodeCalifornia2019_34);
+        map.addLayer(layer_SalinidadGolfodeCalifornia2019_34);
+        map.createPane('pane_TemperaturaGolfodeCalifornia2019_35');
+        map.getPane('pane_TemperaturaGolfodeCalifornia2019_35').style.zIndex = 435;
+        var img_TemperaturaGolfodeCalifornia2019_35 = 'data/TemperaturaGolfodeCalifornia2019_35.png';
+        var img_bounds_TemperaturaGolfodeCalifornia2019_35 = [[21.248611494542228,-112.21706488820153],[28.170451494542228,-105.65333488820154]];
+        var layer_TemperaturaGolfodeCalifornia2019_35 = new L.imageOverlay(img_TemperaturaGolfodeCalifornia2019_35,
+                                              img_bounds_TemperaturaGolfodeCalifornia2019_35,
+                                              {pane: 'pane_TemperaturaGolfodeCalifornia2019_35'});
+        bounds_group.addLayer(layer_TemperaturaGolfodeCalifornia2019_35);
+        map.addLayer(layer_TemperaturaGolfodeCalifornia2019_35);
+        function pop_RutanavegadaGolfodeCalifornia2019_36(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaGolfodeCalifornia2019_36_0() {
+            return {
+                pane: 'pane_RutanavegadaGolfodeCalifornia2019_36',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaGolfodeCalifornia2019_36');
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2019_36').style.zIndex = 436;
+        map.getPane('pane_RutanavegadaGolfodeCalifornia2019_36').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaGolfodeCalifornia2019_36 = new L.geoJson(json_RutanavegadaGolfodeCalifornia2019_36, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaGolfodeCalifornia2019_36',
+            layerName: 'layer_RutanavegadaGolfodeCalifornia2019_36',
+            pane: 'pane_RutanavegadaGolfodeCalifornia2019_36',
+            onEachFeature: pop_RutanavegadaGolfodeCalifornia2019_36,
+            style: style_RutanavegadaGolfodeCalifornia2019_36_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaGolfodeCalifornia2019_36);
+        map.addLayer(layer_RutanavegadaGolfodeCalifornia2019_36);
+        function pop_EnergaAcsticaGolfodeCalifornia2019_37(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time'] !== null ? autolinker.link(feature.properties['time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cruise'] !== null ? autolinker.link(feature.properties['cruise'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sum_nasc'] !== null ? autolinker.link(feature.properties['sum_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mean_nasc'] !== null ? autolinker.link(feature.properties['mean_nasc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['species'] !== null ? autolinker.link(feature.properties['species'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['template'] !== null ? autolinker.link(feature.properties['template'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnergaAcsticaGolfodeCalifornia2019_37_0(feature) {
+            if (feature.properties['sum_nasc'] >= 0.000000 && feature.properties['sum_nasc'] <= 50.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 1.0,
+                opacity: 1,
+                color: 'rgba(31,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50.000000 && feature.properties['sum_nasc'] <= 500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,197,255,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 500.000000 && feature.properties['sum_nasc'] <= 2500.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 2500.000000 && feature.properties['sum_nasc'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 5000.000000 && feature.properties['sum_nasc'] <= 20000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 9.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 20000.000000 && feature.properties['sum_nasc'] <= 50000.000000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 11.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,190,190,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['sum_nasc'] >= 50000.000000 && feature.properties['sum_nasc'] <= 61778.100000 ) {
+                return {
+                pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+                radius: 13.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_EnergaAcsticaGolfodeCalifornia2019_37');
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2019_37').style.zIndex = 437;
+        map.getPane('pane_EnergaAcsticaGolfodeCalifornia2019_37').style['mix-blend-mode'] = 'normal';
+        var layer_EnergaAcsticaGolfodeCalifornia2019_37 = new L.geoJson(json_EnergaAcsticaGolfodeCalifornia2019_37, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EnergaAcsticaGolfodeCalifornia2019_37',
+            layerName: 'layer_EnergaAcsticaGolfodeCalifornia2019_37',
+            pane: 'pane_EnergaAcsticaGolfodeCalifornia2019_37',
+            onEachFeature: pop_EnergaAcsticaGolfodeCalifornia2019_37,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EnergaAcsticaGolfodeCalifornia2019_37_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EnergaAcsticaGolfodeCalifornia2019_37);
+        map.addLayer(layer_EnergaAcsticaGolfodeCalifornia2019_37);
+        function pop_LancesdepescaGolfodeCalifornia2019_38(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lance</th>\
+                        <td>' + (feature.properties['Lance'] !== null ? autolinker.link(feature.properties['Lance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LancesdepescaGolfodeCalifornia2019_38_0() {
+            return {
+                pane: 'pane_LancesdepescaGolfodeCalifornia2019_38',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LancesdepescaGolfodeCalifornia2019_38');
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2019_38').style.zIndex = 438;
+        map.getPane('pane_LancesdepescaGolfodeCalifornia2019_38').style['mix-blend-mode'] = 'normal';
+        var layer_LancesdepescaGolfodeCalifornia2019_38 = new L.geoJson(json_LancesdepescaGolfodeCalifornia2019_38, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LancesdepescaGolfodeCalifornia2019_38',
+            layerName: 'layer_LancesdepescaGolfodeCalifornia2019_38',
+            pane: 'pane_LancesdepescaGolfodeCalifornia2019_38',
+            onEachFeature: pop_LancesdepescaGolfodeCalifornia2019_38,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LancesdepescaGolfodeCalifornia2019_38_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LancesdepescaGolfodeCalifornia2019_38);
+        map.addLayer(layer_LancesdepescaGolfodeCalifornia2019_38);
+        function pop_EstacionesOceanogrficasGolfodeCalifornia2019_39(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Estación</th>\
+                        <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesOceanogrficasGolfodeCalifornia2019_39_0() {
+            return {
+                pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2019_39',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,105,166,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesOceanogrficasGolfodeCalifornia2019_39');
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2019_39').style.zIndex = 439;
+        map.getPane('pane_EstacionesOceanogrficasGolfodeCalifornia2019_39').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesOceanogrficasGolfodeCalifornia2019_39 = new L.geoJson(json_EstacionesOceanogrficasGolfodeCalifornia2019_39, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesOceanogrficasGolfodeCalifornia2019_39',
+            layerName: 'layer_EstacionesOceanogrficasGolfodeCalifornia2019_39',
+            pane: 'pane_EstacionesOceanogrficasGolfodeCalifornia2019_39',
+            onEachFeature: pop_EstacionesOceanogrficasGolfodeCalifornia2019_39,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesOceanogrficasGolfodeCalifornia2019_39_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2019_39);
+        map.addLayer(layer_EstacionesOceanogrficasGolfodeCalifornia2019_39);
+        map.createPane('pane_ClorofilaaSurGolfodeCalifornia2019_40');
+        map.getPane('pane_ClorofilaaSurGolfodeCalifornia2019_40').style.zIndex = 440;
+        var img_ClorofilaaSurGolfodeCalifornia2019_40 = 'data/ClorofilaaSurGolfodeCalifornia2019_40.png';
+        var img_bounds_ClorofilaaSurGolfodeCalifornia2019_40 = [[20.7125,-106.5625],[23.2125,-105.4125]];
+        var layer_ClorofilaaSurGolfodeCalifornia2019_40 = new L.imageOverlay(img_ClorofilaaSurGolfodeCalifornia2019_40,
+                                              img_bounds_ClorofilaaSurGolfodeCalifornia2019_40,
+                                              {pane: 'pane_ClorofilaaSurGolfodeCalifornia2019_40'});
+        bounds_group.addLayer(layer_ClorofilaaSurGolfodeCalifornia2019_40);
+        map.addLayer(layer_ClorofilaaSurGolfodeCalifornia2019_40);
+        map.createPane('pane_TemperaturaSurGolfodeCalifornia2019_41');
+        map.getPane('pane_TemperaturaSurGolfodeCalifornia2019_41').style.zIndex = 441;
+        var img_TemperaturaSurGolfodeCalifornia2019_41 = 'data/TemperaturaSurGolfodeCalifornia2019_41.png';
+        var img_bounds_TemperaturaSurGolfodeCalifornia2019_41 = [[20.71,-106.57],[23.22,-105.41]];
+        var layer_TemperaturaSurGolfodeCalifornia2019_41 = new L.imageOverlay(img_TemperaturaSurGolfodeCalifornia2019_41,
+                                              img_bounds_TemperaturaSurGolfodeCalifornia2019_41,
+                                              {pane: 'pane_TemperaturaSurGolfodeCalifornia2019_41'});
+        bounds_group.addLayer(layer_TemperaturaSurGolfodeCalifornia2019_41);
+        map.addLayer(layer_TemperaturaSurGolfodeCalifornia2019_41);
+        function pop_RutanavegadaSurdelGolfodeCalifornia2019_42(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RutanavegadaSurdelGolfodeCalifornia2019_42_0() {
+            return {
+                pane: 'pane_RutanavegadaSurdelGolfodeCalifornia2019_42',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RutanavegadaSurdelGolfodeCalifornia2019_42');
+        map.getPane('pane_RutanavegadaSurdelGolfodeCalifornia2019_42').style.zIndex = 442;
+        map.getPane('pane_RutanavegadaSurdelGolfodeCalifornia2019_42').style['mix-blend-mode'] = 'normal';
+        var layer_RutanavegadaSurdelGolfodeCalifornia2019_42 = new L.geoJson(json_RutanavegadaSurdelGolfodeCalifornia2019_42, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RutanavegadaSurdelGolfodeCalifornia2019_42',
+            layerName: 'layer_RutanavegadaSurdelGolfodeCalifornia2019_42',
+            pane: 'pane_RutanavegadaSurdelGolfodeCalifornia2019_42',
+            onEachFeature: pop_RutanavegadaSurdelGolfodeCalifornia2019_42,
+            style: style_RutanavegadaSurdelGolfodeCalifornia2019_42_0,
+        });
+        bounds_group.addLayer(layer_RutanavegadaSurdelGolfodeCalifornia2019_42);
+        map.addLayer(layer_RutanavegadaSurdelGolfodeCalifornia2019_42);
+        function pop_LancesdepescaSurdelGolfodeCalifornia2019_43(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table class = "table-layer">\
+			<thead>\
+                <tr>\
+                    <th> <b> IDENTIFICADOR </b> </th>\
+                    <th> <b> CLAVE </b></th>\
+                </tr>\
+                </thead>\
+                    <tr>\
+                        <th scope="row">Crucero</th>\
+                        <td>' + (feature.properties['Crucero'] !== null ? autolinker.link(feature.properties['Crucero'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lance</th>\
+                        <td>' + (feature.properties['Lance'] !== null ? autolinker.link(feature.properties['Lance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LancesdepescaSurdelGolfodeCalifornia2019_43_0() {
+            return {
+                pane: 'pane_LancesdepescaSurdelGolfodeCalifornia2019_43',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LancesdepescaSurdelGolfodeCalifornia2019_43');
+        map.getPane('pane_LancesdepescaSurdelGolfodeCalifornia2019_43').style.zIndex = 443;
+        map.getPane('pane_LancesdepescaSurdelGolfodeCalifornia2019_43').style['mix-blend-mode'] = 'normal';
+        var layer_LancesdepescaSurdelGolfodeCalifornia2019_43 = new L.geoJson(json_LancesdepescaSurdelGolfodeCalifornia2019_43, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LancesdepescaSurdelGolfodeCalifornia2019_43',
+            layerName: 'layer_LancesdepescaSurdelGolfodeCalifornia2019_43',
+            pane: 'pane_LancesdepescaSurdelGolfodeCalifornia2019_43',
+            onEachFeature: pop_LancesdepescaSurdelGolfodeCalifornia2019_43,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LancesdepescaSurdelGolfodeCalifornia2019_43_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LancesdepescaSurdelGolfodeCalifornia2019_43);
+        map.addLayer(layer_LancesdepescaSurdelGolfodeCalifornia2019_43);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/LancesdepescaSurdelGolfodeCalifornia2019_43.png" /> Lances de pesca Sur del Golfo de California 2019': layer_LancesdepescaSurdelGolfodeCalifornia2019_43,'<img src="legend/RutanavegadaSurdelGolfodeCalifornia2019_42.png" /> Ruta navegada Sur del Golfo de California 2019': layer_RutanavegadaSurdelGolfodeCalifornia2019_42,"Temperatura Sur Golfo de California 2019": layer_TemperaturaSurGolfodeCalifornia2019_41,"Clorofila-a Sur Golfo de California 2019": layer_ClorofilaaSurGolfodeCalifornia2019_40,'<img src="legend/EstacionesOceanogrficasGolfodeCalifornia2019_39.png" /> Estaciones Oceanográficas Golfo de California 2019': layer_EstacionesOceanogrficasGolfodeCalifornia2019_39,'<img src="legend/LancesdepescaGolfodeCalifornia2019_38.png" /> Lances de pesca Golfo de California 2019': layer_LancesdepescaGolfodeCalifornia2019_38,'Energía Acústica Golfo de California 2019<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_5000200004.png" /></td><td>5000 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_20000500005.png" /></td><td>20000 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2019_37_500006177816.png" /></td><td>50000 - 61778.1</td></tr></table>': layer_EnergaAcsticaGolfodeCalifornia2019_37,'<img src="legend/RutanavegadaGolfodeCalifornia2019_36.png" /> Ruta navegada Golfo de California 2019': layer_RutanavegadaGolfodeCalifornia2019_36,"Temperatura Golfo de California 2019": layer_TemperaturaGolfodeCalifornia2019_35,"Salinidad Golfo de California 2019": layer_SalinidadGolfodeCalifornia2019_34,"Oxígeno Golfo de California 2019": layer_OxgenoGolfodeCalifornia2019_33,"Clorofila-a Golfo de California 2019": layer_ClorofilaaGolfodeCalifornia2019_32,'<img src="legend/EstacionesOceanogrficasIslasMaras2019_31.png" /> Estaciones Oceanográficas Islas Marías 2019': layer_EstacionesOceanogrficasIslasMaras2019_31,'Energía Acústica Islas Marías 2019<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaIslasMaras2019_30_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaIslasMaras2019_30_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaIslasMaras2019_30_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaIslasMaras2019_30_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaIslasMaras2019_30_500017354964.png" /></td><td>5000 - 17354.96</td></tr></table>': layer_EnergaAcsticaIslasMaras2019_30,'<img src="legend/RutanavegadaIslasMaras2019_29.png" /> Ruta navegada Islas Marías 2019': layer_RutanavegadaIslasMaras2019_29,"Temperatura Islas Marías 2019": layer_TemperaturaIslasMaras2019_28,"Salinidad Islas Marías 2019": layer_SalinidadIslasMaras2019_27,"Oxígeno Islas Marías 2019": layer_OxgenoIslasMaras2019_26,"Clorofila-a Islas Marías 2019": layer_ClorofilaaIslasMaras2019_25,'<img src="legend/EstacionesOceanogrficasGolfodeCalifornia2020_24.png" /> Estaciones Oceanográficas Golfo de California 2020': layer_EstacionesOceanogrficasGolfodeCalifornia2020_24,'<img src="legend/LancesdepescaGolfodeCalifornia2020_23.png" /> Lances de pesca Golfo de California 2020': layer_LancesdepescaGolfodeCalifornia2020_23,'Energía Acústica Golfo de California 2020<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_5000200004.png" /></td><td>5000 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2020_22_2000039574455.png" /></td><td>20000 - 39574.45</td></tr></table>': layer_EnergaAcsticaGolfodeCalifornia2020_22,'<img src="legend/RutanavegadaGolfodeCalifornia2020_21.png" /> Ruta navegada Golfo de California 2020': layer_RutanavegadaGolfodeCalifornia2020_21,"Temperatura Golfo de California 2020": layer_TemperaturaGolfodeCalifornia2020_20,"Salinidad Golfo de California 2020": layer_SalinidadGolfodeCalifornia2020_19,"Oxígeno Golfo de California 2020": layer_OxgenoGolfodeCalifornia2020_18,"Clorofila-a Golfo de California 2020": layer_ClorofilaaGolfodeCalifornia2020_17,'<img src="legend/EstacionesOceanogrficasGolfodeCalifornia2021_16.png" /> Estaciones Oceanográficas Golfo de California 2021': layer_EstacionesOceanogrficasGolfodeCalifornia2021_16,'<img src="legend/LancesdepescaGolfodeCalifornia2021_15.png" /> Lances de pesca Golfo de California 2021': layer_LancesdepescaGolfodeCalifornia2021_15,'Energía Acústica Golfo de California 2021<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_5000200004.png" /></td><td>5000 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_20000500005.png" /></td><td>20000 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaGolfodeCalifornia2021_14_5000063512966.png" /></td><td>50000 - 63512.96</td></tr></table>': layer_EnergaAcsticaGolfodeCalifornia2021_14,'<img src="legend/RutanavegadaGolfodeCalifornia2021_13.png" /> Ruta navegada Golfo de California 2021': layer_RutanavegadaGolfodeCalifornia2021_13,"Temperatura Golfo de California 2021": layer_TemperaturaGolfodeCalifornia2021_12,"Salinidad Golfo de California 2021": layer_SalinidadGolfodeCalifornia2021_11,"Oxígeno Golfo de California 2021": layer_OxgenoGolfodeCalifornia2021_10,"Clorofila-a Golfo de California 2021": layer_ClorofilaaGolfodeCalifornia2021_9,'<img src="legend/EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8.png" /> Estaciones Oceanográficas Centro del Golfo de California 2021': layer_EstacionesOceanogrficasCentrodelGolfodeCalifornia2021_8,'<img src="legend/LancesdepescaCentrodelGolfodeCalifornia2021_7.png" /> Lances de pesca Centro del Golfo de California 2021': layer_LancesdepescaCentrodelGolfodeCalifornia2021_7,'Energía Acústica Centro del Golfo de California 2021<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaCentrodelGolfodeCalifornia2021_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaCentrodelGolfodeCalifornia2021_6_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaCentrodelGolfodeCalifornia2021_6_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaCentrodelGolfodeCalifornia2021_6_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaCentrodelGolfodeCalifornia2021_6_50009116184.png" /></td><td>5000 - 9116.18</td></tr></table>': layer_EnergaAcsticaCentrodelGolfodeCalifornia2021_6,'<img src="legend/RutanavegadaCentroGolfodeCalifornia2021_5.png" /> Ruta navegada Centro Golfo de California 2021': layer_RutanavegadaCentroGolfodeCalifornia2021_5,"Temperatura Centro del Golfo de California 2021": layer_TemperaturaCentrodelGolfodeCalifornia2021_4,"Salinidad Centro del Golfo de California 2021": layer_SalinidadCentrodelGolfodeCalifornia2021_3,"Oxígeno Centro del Golfo de California 2021": layer_OxgenoCentrodelGolfodeCalifornia2021_2,"Clorofila-a Centro del Golfo de California 2021": layer_ClorofilaaCentrodelGolfodeCalifornia2021_1,"ESRI Satellite": layer_ESRISatellite_0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+
+         <!--PLUGINS DE QGIS-->
+         <script src="../../lib/plugins/L.Control.MousePosition.js"></script>
+         <script src="../../lib/plugins/leaflet.nauticscale.js"></script>
+ 
+         <!--SCRIPT PROPIO-->
+         <script src="../../js/leaflet_load_pluging_qgis.js"></script>
+    </body>
+</html>

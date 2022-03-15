@@ -1,0 +1,107 @@
+body{
+    font-family: 'Montserrat';
+}
+
+
+.navegacion {
+    background-color: #0c231e;
+    font-size: 20px;
+    height: 50px;
+}
+
+.logo-agricultura{
+    width: 200px;
+    margin-top: 2px;
+}
+.logo-inapesca{
+    width: 150px;
+    margin-top: 2px;
+    display: inline-block;
+}
+.navegacion ul{
+    list-style: none;
+    display: inline-block;
+    margin: 10px;
+}
+.navegacion ul li {
+    display: inline-block;
+}
+.navegacion ul li a{
+    color: white;
+    display: block;
+    text-decoration: none;
+    padding: 0.5em;
+}
+
+#map {
+    height: calc(100vh - 50px);
+    left: 0%;
+    width: 100%;
+}
+
+
+/*Posicionamiento de paletas*/
+.paletas {
+    position:relative;
+    bottom: -93%;
+    left: 20%;
+    height: auto;
+    width: 400px;
+    z-index: 800;
+}
+
+/*Estilos de las tablas*/
+.table-layer {
+    text-align:left;
+    border-collapse: collapse;
+    width: 100%;
+    }
+    
+     .table-layer td{
+        padding: 10px, 5px, 10px, 5px;
+    }
+    
+     .table-layer thead{
+        background-color: #235B4E;
+        border-bottom: 20px;
+        color: white;
+        padding: 1em, 3px, 2px,3px;
+    }
+    
+     .table-layer tr:nth-child(even){
+        background: #ddd;
+    }
+     .table-layer tr:hover td {
+        background-color: #7B8DBD;
+        color: white;
+    }
+
+    .table-layer img {
+        height: auto;
+        width: 180px;
+        text-align: center;
+    }
+
+
+    /*MEDIAS QUERYS*/
+@media (max-width: 680px){
+    .paletas {
+        position:relative;
+    bottom: -90%;
+    left: 20%;
+    height: auto;
+    width: 300px;
+    z-index: 800;
+    }
+
+}
+
+@media (max-width: 400px){
+    .paletas {
+       display: none;
+    }
+
+}
+
+
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página oficial de GEOPESCA">
+    <title>Geopesca</title>
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!--ESTILOS DE LEAFLET-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    
+    <!--ESTILOS DEL GOBIERNO DE MEXICO-->
+    <link href="https://framework-gb.cdn.gob.mx/gm/v4/css/main.css" rel="stylesheet">
+    <link href="https://framework-gb.cdn.gob.mx/gm/v4/image/favicon.ico" rel="shortcut icon">
+    <!--PLUGINS ESTILOS DE LEAFLET-->
+    <link rel="stylesheet" href="lib/plugins/L.Control.MousePosition.css" type="text/css">
+
+    <!--ESTILOS PROPIOS-->
+    <link rel="stylesheet" href="css/styles_map_main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-light sub-navbar navbar-fixed-top">
+        <div class="container">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarDropdown" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand sub-navbar" href="https://www.gob.mx/inapesca" target="_blank">INAPESCA</a>
+
+            <div class="collapse navbar-collapse" id="subNavBarDropdown">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                    <a class="nav-link subnav-link" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link subnav-link" href="https://www.gob.mx/inapesca/acciones-y-programas/buque-de-investigacion-pesquera-y-oceanografica-inapesca-56565" target="_blank">Informes y publicaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link subnav-link" href="#">Geopesca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link subnav-link" href="https://sites.google.com/inapesca.gob.mx/vinculacion/siga" target="_blank">SIGA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link subnav-link" href="https://www.gob.mx/inapesca#4436" target="_blank">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="container">
+    <div class="bienvenida_geopesca">
+        <h2>Bienvenidos a GEOPESCA</h2>
+        <p> <b>GEOPESCA</b> es un geoportal del INAPESCA que contiene información relevante de los cruceros realizados en los mares mexicanos. Para visualizar los datos que contiene el portal usted debe hacer clic en la región de su interés, para ser direccionado al catálogo de la información disponible en esa región. Por ahora estamos incluyendo información referente al Pacífico mexicano, pero estamos trabajando para incluir otras regiones.</p>
+
+    </div>
+    
+    <div id="mapa_principal_nav"></div>
+
+    <h3>Descripción de las capas</h3>
+    <ul>
+        <li>La densidad de energía acústica (NASC), es obtenida mediante el software Echoview mediante ecogramas registradas por el ecosonda EK60</li>
+        <li>Ruta seguida (GPS), corresponde a la trayectoria seguida con el BI durante un crucero de investigación</li>
+        <li>Las capas ráster de clorofila-a del año 2019 fueron obtenidas del portal <a href="https://coastwatch.pfeg.noaa.gov/erddap/index.html" target="_blank">ERDDAP</a> de la <a href="https://www.noaa.gov/" target="_blank">NOAA</a>, mientras que las del 2020 hasta la actualidad de la termosal</li>
+        <li>Las capas ráster de temperatura y salinidad son generados a partir de los datos de la termosal</li>
+      </ul>
+
+      <h3>Usabilidad de los mapas web</h3>
+      <p>En el botón de la hamburguesa, dar click y se despliega la leyenda (simbología) del mapa. Se puede prender y apagar cada capa para poder observar cada una de ellas. La simbología de los ráster, se encuentran en la parte inferior del mapa </p>
+
+    <div class="cruceros_year">
+        <h3>Cruceros por año</h3>
+        <ul>
+            <li>2015</li>
+            <li>2016</li>
+            <li>2017</li>
+            <li>2018</li>
+            <li>2019</li>
+            <li>2020</li>
+            <li>2021</li>
+        </ul>
+    </div>
+
+</div>
+    
+
+    <!--CARGAR LEAFLET-->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+
+    <!--CARGAR PLUGIN PARA LEAFLET-->
+    <script src="lib/plugins/leaflet.ajax.min.js"></script>
+    <script src="lib/plugins/leaflet-providers.js"></script>
+    <script src="lib/plugins/L.Control.MousePosition.js"></script>
+
+    
+    <script src="./js/mapa_principal.js"></script>
+
+    <!--JS DEL GOBIERNO DE MEXICO-->
+    <script src="https://framework-gb.cdn.gob.mx/gm/v4/js/gobmx.js"></script>
+</body>
+</html>
