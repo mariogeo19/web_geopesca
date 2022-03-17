@@ -95,6 +95,19 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
+        map.createPane('pane_GooglecnNormal_0');
+        map.getPane('pane_GooglecnNormal_0').style.zIndex = 400;
+        var layer_GooglecnNormal_0 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}', {
+            pane: 'pane_GooglecnNormal_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">地图数据 ©2016 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 21
+        });
+        layer_GooglecnNormal_0;
+        map.addLayer(layer_GooglecnNormal_0);
         map.createPane('pane_ESRISatellite_0');
         map.getPane('pane_ESRISatellite_0').style.zIndex = 400;
         var layer_ESRISatellite_0 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -399,6 +412,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3qbuT7u target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Imagen'] !== null ? '<img src="images/' + String(feature.properties['Imagen']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -468,6 +485,10 @@
                     <tr>\
                         <th scope="row">Clave</th>\
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3qbuT7u target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -800,6 +821,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3IeBggw target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Imagen'] !== null ? '<img src="images/' + String(feature.properties['Imagen']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -869,6 +894,10 @@
                     <tr>\
                         <th scope="row">Clave</th>\
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3IeBggw target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1050,7 +1079,7 @@
         bounds_group.addLayer(layer_EstacionesOceanogrficasPacficoTropicalOriental2019_21);
         map.addLayer(layer_EstacionesOceanogrficasPacficoTropicalOriental2019_21);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/EstacionesOceanogrficasPacficoTropicalOriental2019_21.png" /> Estaciones Oceanográficas Pacífico Tropical Oriental 2019': layer_EstacionesOceanogrficasPacficoTropicalOriental2019_21,'<img src="legend/RutanavegadaPacficoTropicalOriental2019_20.png" /> Ruta navegada Pacífico Tropical Oriental 2019': layer_RutanavegadaPacficoTropicalOriental2019_20,"Temperatura Pacífico Tropical Oriental 2019": layer_TemperaturaPacficoTropicalOriental2019_19,"Salinidad Pacífico Tropical Oriental 2019": layer_SalinidadPacficoTropicalOriental2019_18,"Clorofila-a Pacífico Tropical Oriental 2019": layer_ClorofilaaPacficoTropicalOriental2019_17,'<img src="legend/EstacionesOceanogrficasPacficoCentroSur2020_16.png" /> Estaciones Oceanográficas Pacífico Centro-Sur 2020': layer_EstacionesOceanogrficasPacficoCentroSur2020_16,'<img src="legend/LancesdepescaPacficoCentroSur2020_15.png" /> Lances de pesca Pacífico Centro-Sur 2020 ': layer_LancesdepescaPacficoCentroSur2020_15,'Energía Acústica Pacífico Centro-Sur 2020<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_5000200004.png" /></td><td>5000 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_20000500005.png" /></td><td>20000 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_500001000006.png" /></td><td>50000 - 100000</td></tr></table>': layer_EnergaAcsticaPacficoCentroSur2020_14,'<img src="legend/RutanavegadaPacficoCentroSur2020_13.png" /> Ruta navegada Pacífico Centro-Sur 2020 ': layer_RutanavegadaPacficoCentroSur2020_13,"Temperatura Pacífico Centro-Sur 2020 ": layer_TemperaturaPacficoCentroSur2020_12,"Salinidad Pacífico Centro-Sur 2020 ": layer_SalinidadPacficoCentroSur2020_11,"Oxígeno Pacífico Centro-Sur 2020 ": layer_OxgenoPacficoCentroSur2020_10,"Clorofila-a Pacífico Cento-Sur 2020 ": layer_ClorofilaaPacficoCentoSur2020_9,'<img src="legend/EstacionesoceanogrficasPacficoCentroSur2021_8.png" /> Estaciones oceanográficas Pacífico Centro-Sur 2021': layer_EstacionesoceanogrficasPacficoCentroSur2021_8,'<img src="legend/LancesdepescaPacficoCentroSur2021_7.png" /> Lances de pesca Pacífico Centro-Sur 2021': layer_LancesdepescaPacficoCentroSur2021_7,'Energía acústica Pacífico Centro-Sur 2021<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_515001.png" /></td><td>51 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_50125002.png" /></td><td>501 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_250150003.png" /></td><td>2501 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_5001200004.png" /></td><td>5001 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_20001500005.png" /></td><td>20001 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_500011172116.png" /></td><td>50001 - 117211</td></tr></table>': layer_EnergaacsticaPacficoCentroSur2021_6,'<img src="legend/RutanavegadaPacficoCentroSur2021_5.png" /> Ruta navegada Pacífico Centro-Sur 2021': layer_RutanavegadaPacficoCentroSur2021_5,"Temperatura Pacífico Centro-Sur 2021": layer_TemperaturaPacficoCentroSur2021_4,"Salinidad Pacífico Centro-Sur 2021": layer_SalinidadPacficoCentroSur2021_3,"Clorofila-a Pacífico Centro-Sur 2021": layer_ClorofilaaPacficoCentroSur2021_2,"Oxígeno Pacífico Centro-Sur 2021": layer_OxgenoPacficoCentroSur2021_1,"ESRI Satellite": layer_ESRISatellite_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/EstacionesOceanogrficasPacficoTropicalOriental2019_21.png" /> Estaciones Oceanográficas Pacífico Tropical Oriental 2019': layer_EstacionesOceanogrficasPacficoTropicalOriental2019_21,'<img src="legend/RutanavegadaPacficoTropicalOriental2019_20.png" /> Ruta navegada Pacífico Tropical Oriental 2019': layer_RutanavegadaPacficoTropicalOriental2019_20,"Temperatura Pacífico Tropical Oriental 2019": layer_TemperaturaPacficoTropicalOriental2019_19,"Salinidad Pacífico Tropical Oriental 2019": layer_SalinidadPacficoTropicalOriental2019_18,"Clorofila-a Pacífico Tropical Oriental 2019": layer_ClorofilaaPacficoTropicalOriental2019_17,'<img src="legend/EstacionesOceanogrficasPacficoCentroSur2020_16.png" /> Estaciones Oceanográficas Pacífico Centro-Sur 2020': layer_EstacionesOceanogrficasPacficoCentroSur2020_16,'<img src="legend/LancesdepescaPacficoCentroSur2020_15.png" /> Lances de pesca Pacífico Centro-Sur 2020 ': layer_LancesdepescaPacficoCentroSur2020_15,'Energía Acústica Pacífico Centro-Sur 2020<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_50025002.png" /></td><td>500 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_250050003.png" /></td><td>2500 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_5000200004.png" /></td><td>5000 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_20000500005.png" /></td><td>20000 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaAcsticaPacficoCentroSur2020_14_500001000006.png" /></td><td>50000 - 100000</td></tr></table>': layer_EnergaAcsticaPacficoCentroSur2020_14,'<img src="legend/RutanavegadaPacficoCentroSur2020_13.png" /> Ruta navegada Pacífico Centro-Sur 2020 ': layer_RutanavegadaPacficoCentroSur2020_13,"Temperatura Pacífico Centro-Sur 2020 ": layer_TemperaturaPacficoCentroSur2020_12,"Salinidad Pacífico Centro-Sur 2020 ": layer_SalinidadPacficoCentroSur2020_11,"Oxígeno Pacífico Centro-Sur 2020 ": layer_OxgenoPacficoCentroSur2020_10,"Clorofila-a Pacífico Cento-Sur 2020 ": layer_ClorofilaaPacficoCentoSur2020_9,'<img src="legend/EstacionesoceanogrficasPacficoCentroSur2021_8.png" /> Estaciones oceanográficas Pacífico Centro-Sur 2021': layer_EstacionesoceanogrficasPacficoCentroSur2021_8,'<img src="legend/LancesdepescaPacficoCentroSur2021_7.png" /> Lances de pesca Pacífico Centro-Sur 2021': layer_LancesdepescaPacficoCentroSur2021_7,'Energía acústica Pacífico Centro-Sur 2021<br /><table><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_515001.png" /></td><td>51 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_50125002.png" /></td><td>501 - 2500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_250150003.png" /></td><td>2501 - 5000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_5001200004.png" /></td><td>5001 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_20001500005.png" /></td><td>20001 - 50000</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentroSur2021_6_500011172116.png" /></td><td>50001 - 117211</td></tr></table>': layer_EnergaacsticaPacficoCentroSur2021_6,'<img src="legend/RutanavegadaPacficoCentroSur2021_5.png" /> Ruta navegada Pacífico Centro-Sur 2021': layer_RutanavegadaPacficoCentroSur2021_5,"Temperatura Pacífico Centro-Sur 2021": layer_TemperaturaPacficoCentroSur2021_4,"Salinidad Pacífico Centro-Sur 2021": layer_SalinidadPacficoCentroSur2021_3,"Clorofila-a Pacífico Centro-Sur 2021": layer_ClorofilaaPacficoCentroSur2021_2,"Oxígeno Pacífico Centro-Sur 2021": layer_OxgenoPacficoCentroSur2021_1,"ESRI Satellite": layer_ESRISatellite_0,"Google.cn Normal": layer_GooglecnNormal_0,}).addTo(map);
         setBounds();
         L.ImageOverlay.include({
             getBounds: function () {

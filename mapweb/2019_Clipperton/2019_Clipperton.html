@@ -91,6 +91,19 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
+        map.createPane('pane_GooglecnNormal_0');
+        map.getPane('pane_GooglecnNormal_0').style.zIndex = 400;
+        var layer_GooglecnNormal_0 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}', {
+            pane: 'pane_GooglecnNormal_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">地图数据 ©2016 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 21
+        });
+        layer_GooglecnNormal_0;
+        map.addLayer(layer_GooglecnNormal_0);
         map.createPane('pane_ESRISatellite_0');
         map.getPane('pane_ESRISatellite_0').style.zIndex = 400;
         var layer_ESRISatellite_0 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -445,7 +458,7 @@
         bounds_group.addLayer(layer_EstacionesOceanogrficasPacficoCentralTropical2019_8);
         map.addLayer(layer_EstacionesOceanogrficasPacficoCentralTropical2019_8);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/EstacionesOceanogrficasPacficoCentralTropical2019_8.png" /> Estaciones Oceanográficas Pacífico Central Tropical 2019': layer_EstacionesOceanogrficasPacficoCentralTropical2019_8,'<img src="legend/LancesdepescaPacficoCentralTropical2019_7.png" /> Lances de pesca Pacífico Central Tropical 2019': layer_LancesdepescaPacficoCentralTropical2019_7,'Energía acústica Pacífico Central Tropical 2019 <br /><table><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_500218892.png" /></td><td>500 - 2188.9</td></tr></table>': layer_EnergaacsticaPacficoCentralTropical2019_6,'<img src="legend/RutanavegadaPacficoCentralTropical2019_5.png" /> Ruta navegada Pacífico Central Tropical 2019': layer_RutanavegadaPacficoCentralTropical2019_5,"Temperatura Pacífico Central Tropical 2019": layer_TemperaturaPacficoCentralTropical2019_4,"Salinidad Pacífico Central Tropical 2019": layer_SalinidadPacficoCentralTropical2019_3,"Clorofila-a Pacífico Central Tropical 2019": layer_ClorofilaaPacficoCentralTropical2019_2,"Oxígeno Pacífico Central Tropical 2019": layer_OxgenoPacficoCentralTropical2019_1,"ESRI Satellite": layer_ESRISatellite_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/EstacionesOceanogrficasPacficoCentralTropical2019_8.png" /> Estaciones Oceanográficas Pacífico Central Tropical 2019': layer_EstacionesOceanogrficasPacficoCentralTropical2019_8,'<img src="legend/LancesdepescaPacficoCentralTropical2019_7.png" /> Lances de pesca Pacífico Central Tropical 2019': layer_LancesdepescaPacficoCentralTropical2019_7,'Energía acústica Pacífico Central Tropical 2019 <br /><table><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_505001.png" /></td><td>50 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/EnergaacsticaPacficoCentralTropical2019_6_500218892.png" /></td><td>500 - 2188.9</td></tr></table>': layer_EnergaacsticaPacficoCentralTropical2019_6,'<img src="legend/RutanavegadaPacficoCentralTropical2019_5.png" /> Ruta navegada Pacífico Central Tropical 2019': layer_RutanavegadaPacficoCentralTropical2019_5,"Temperatura Pacífico Central Tropical 2019": layer_TemperaturaPacficoCentralTropical2019_4,"Salinidad Pacífico Central Tropical 2019": layer_SalinidadPacficoCentralTropical2019_3,"Clorofila-a Pacífico Central Tropical 2019": layer_ClorofilaaPacficoCentralTropical2019_2,"Oxígeno Pacífico Central Tropical 2019": layer_OxgenoPacficoCentralTropical2019_1,"ESRI Satellite": layer_ESRISatellite_0,"Google.cn Normal": layer_GooglecnNormal_0,}).addTo(map);
         setBounds();
         L.ImageOverlay.include({
             getBounds: function () {
