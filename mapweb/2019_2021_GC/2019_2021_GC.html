@@ -13,6 +13,7 @@
 
          <!--PLUGINS ESTILOS DE LEAFLET-->
          <link rel="stylesheet" href="../../lib/plugins/L.Control.MousePosition.css" type="text/css">
+         <link rel="stylesheet" href="../../lib/plugins/Control.MiniMap.min.css">
 
          <!--ESTILOS DEL GOBIERNO-->
          <link href="https://framework-gb.cdn.gob.mx/gm/v4/image/favicon.ico" rel="shortcut icon">
@@ -31,7 +32,7 @@
              <div class="navegacion">
                  <a href="https://www.gob.mx/agricultura" target="_blank"><img class="logo-agricultura" src="../../fig/agricultura2.png" alt=" Logotipo de Agricultura"></a> 
                   <ul>
-                     <li><a href="../../geopesca.html">Geoportal del INAPESCA (GEOPESCA) </a></li>
+                     <li><a href="../../geopesca.html">Geoportal del INAPESCA-GEOPESCA </a></li>
                      <li><a href="../../index.html"> B/I Dr. Jorge Carranza Fraser </a></li>
                   </ul>
                  <a href="https://www.gob.mx/inapesca/" target="_blank"><img class="logo-inapesca" src="../../fig/inapesca2.png" alt=" Logotipo de Inapesca"></a> 
@@ -71,6 +72,9 @@
         <script src="data/EstacionesOceanogrficasGolfodeCalifornia2019_39.js"></script>
         <script src="data/RutanavegadaSurdelGolfodeCalifornia2019_42.js"></script>
         <script src="data/LancesdepescaSurdelGolfodeCalifornia2019_43.js"></script>
+        
+       
+        
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -2159,13 +2163,19 @@
                 return this._bounds;
             }
         });
+        
+
         </script>
+         
 
          <!--PLUGINS DE LEAFLET-->
+         <script src="../../lib/plugins/Control.MiniMap.min.js"></script>
          <script src="../../lib/plugins/L.Control.MousePosition.js"></script>
          <script src="../../lib/plugins/leaflet.nauticscale.js"></script>
+         
  
          <!--SCRIPT PROPIO-->
+         <script src="../../js/minimap_load.js"></script>
          <script src="../../js/leaflet_load_pluging_qgis.js"></script>
     </body>
 </html>

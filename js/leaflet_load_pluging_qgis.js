@@ -8,4 +8,3 @@ map.addControl(new L.Control.ScaleNautic({
     imperial: false,
     nautic: true
 }));
-
