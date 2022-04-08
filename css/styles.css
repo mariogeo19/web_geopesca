@@ -41,6 +41,10 @@ body {
     width: 60%;
 }
 
+.figura-aniversario-inapesca {
+    margin-bottom: 16px;
+}
+
 /*Seccion descripcion tecnica de barcos*/
 .description_barcos {
     padding-bottom: 30px;

@@ -15,6 +15,12 @@
     text-decoration: none;
 }
 
+.figura-aniversario-inapesca-geopesca {
+    width: 300px;
+    position: relative;
+    left: 20%;
+}
+
 
 /*Estilos de la tabla del mapa principal*/
 .tabla-geopesca {
@@ -54,3 +60,8 @@
     font-family: 'Montserrat';
 }
 
+@media (max-width: 400px){
+    .figura-aniversario-inapesca-geopesca {
+        width: 220px;
+    }
+}
