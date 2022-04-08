@@ -21,7 +21,7 @@ function regiones_marinas_get_color(feauture) {
     if(feauture === "Colombia") return "#ee3a67";
     if(feauture === "Colombia Atlántico") return "#7794ea";
     if(feauture === "Nicaragua Pacífico") return "#7be11c";
-    if(feauture === "Nicaragua Atlántico") return "#cb641f";
+    if(feauture === "Nicaragua Atlántico") return "#58514c";
     if(feauture === "El Salvador Pacífico") return "#d4b57e";
     if(feauture === "El Salvador") return "#d4b57e";
     if(feauture === "Costa Rica Pacífico") return "#e9f084";
