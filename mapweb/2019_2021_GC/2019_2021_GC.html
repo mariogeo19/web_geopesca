@@ -798,6 +798,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3O3JJak target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -867,6 +871,10 @@
                     <tr>\
                         <th scope="row">Clave</th>\
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://bit.ly/3O3JJak target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
