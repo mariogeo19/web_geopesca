@@ -1,4 +1,4 @@
-let mapa_principal_region = L.map('mapa_principal_nav').setView([17.06, -97.53], 4);
+let mapa_principal_region = L.map('mapa_principal_nav').setView([20.00, -104.00], 5);
 
 let lyrOSM= L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { minZoom: 3, maxZoom: 17 });
 
