@@ -66,7 +66,7 @@ function regiones_marinas_get_link(feauture) {
 function regiones_marinas_get_link2022(feauture) {
     if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Centroamericano") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Pacífico Sudcaliforniano") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    if(feauture === "Pacífico Sudcaliforniano") return '<a href = "mapweb/2022_CooPBC/2022_CooPBC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Golfo de California") return '<a href = "mapweb/2022_GC/2022_GC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Clipperton Island") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
