@@ -6,5 +6,6 @@ const ctlMousePosition = L.control.mousePosition().addTo(map)
 map.addControl(new L.Control.ScaleNautic({
     metric: false,
     imperial: false,
-    nautic: true
+    nautic: true,
+    position: "bottomright",
 }));

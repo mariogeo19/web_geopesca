@@ -49,34 +49,50 @@ function style_region (feature) {
 
 
 function regiones_marinas_get_link(feauture) {
-    if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Centroamericano") return '<a href = "mapweb/2019_2021_PCS/2019_2021_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Sudcaliforniano") return '<a href = "mapweb/2019_2021_CooPBC/2019_2021_CooPBC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Golfo de California") return '<a href = "mapweb/2019_2021_GC/2019_2021_GC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Clipperton Island") return '<a href = "mapweb/2019_Clipperton/2019_Clipperton.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Mar Caribe") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Mar Caribe") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Transicional Mexicano") return '<a href = "mapweb/2019_2021_PCS/2019_2021_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Golfo de México Norte") return '';
-    if(feauture === "Panamá Atlántico") return '';
-    if(feauture === "Panamá Pacífico") return '';
+    //if(feauture === "Golfo de México Norte") return '';
+    //if(feauture === "Panamá Atlántico") return '';
+    //if(feauture === "Panamá Pacífico") return '';
     return "";
 }
 
 function regiones_marinas_get_link2022(feauture) {
-    if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Centroamericano") return '<a href = "mapweb/2022_PCS/2022_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Sudcaliforniano") return '<a href = "mapweb/2022_CooPBC/2022_CooPBC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Golfo de California") return '<a href = "mapweb/2022_GC/2022_GC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Clipperton Island") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Mar Caribe") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Clipperton Island") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Mar Caribe") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
     if(feauture === "Pacífico Transicional Mexicano") return '<a href = "mapweb/2022_PCS/2022_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
-    if(feauture === "Golfo de México Norte") return '';
-    if(feauture === "Panamá Atlántico") return '';
-    if(feauture === "Panamá Pacífico") return '';
+    //if(feauture === "Golfo de México Norte") return '';
+    //if(feauture === "Panamá Atlántico") return '';
+    //if(feauture === "Panamá Pacífico") return '';
     return "";
 }
+
+function regiones_marinas_get_link2023(feauture) {
+    //if(feauture === "Pacífico Transicional de Monterrey") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    if(feauture === "Pacífico Centroamericano") return '<a href = "mapweb/2023_PCS/2023_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    if(feauture === "Pacífico Sudcaliforniano") return '<a href = "mapweb/2023_CooPBC/2023_CooPBC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    if(feauture === "Golfo de California") return '<a href = "mapweb/2023_GC/2023_GC.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Golfo de México Sur") return '<a href = "#" ><b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Clipperton Island") return '<a href = "#" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Mar Caribe") return '<a href = "#" > <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    if(feauture === "Pacífico Transicional Mexicano") return '<a href = "mapweb/2023_PCS/2023_PCS.html" target="_blank"> <b> Ver Mapa </b>  <i class="fas fa-angle-double-right"></i></a>';
+    //if(feauture === "Golfo de México Norte") return '';
+    //if(feauture === "Panamá Atlántico") return '';
+    //if(feauture === "Panamá Pacífico") return '';
+    return "";
+}
+
 
 
 function popup_region (feature, layer) {
@@ -98,6 +114,10 @@ function popup_region (feature, layer) {
         <tr>
             <td> <b> Periodo 2022</b> </td>
             <td> ${regiones_marinas_get_link2022(feature.properties.UNION)}</td> 
+        </tr> 
+        <tr>
+            <td> <b> Periodo 2023</b> </td>
+            <td> ${regiones_marinas_get_link2023(feature.properties.UNION)}</td> 
         </tr> 
     </table>`);
   }

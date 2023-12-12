@@ -25,7 +25,7 @@
             margin: 0;
         }
         </style>
-        <title>Golfo de California 2022</title>
+        <title>Golfo de California</title>
     </head>
     <body>
         <div class="navegacion">
@@ -102,7 +102,7 @@
         var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             pane: 'pane_OSMStandard_0',
             opacity: 1.0,
-            attribution: '<a href="https://www.openstreetmap.org/copyright"></a>',
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
@@ -449,6 +449,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -518,6 +522,10 @@
                     <tr>\
                         <th scope="row">Estación</th>\
                         <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -834,6 +842,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -903,6 +915,10 @@
                     <tr>\
                         <th scope="row">Estación</th>\
                         <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});

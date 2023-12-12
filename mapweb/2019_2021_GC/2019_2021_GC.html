@@ -117,7 +117,7 @@
         var layer_GooglecnNormal_0 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}', {
             pane: 'pane_GooglecnNormal_0',
             opacity: 1.0,
-            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">地图数据 ©2016 Google</a>',
+            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">©2016 Google</a>',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
@@ -397,6 +397,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://acortar.link/ubB4mV target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -466,6 +470,10 @@
                     <tr>\
                         <th scope="row">Clave</th>\
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://acortar.link/ubB4mV target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});

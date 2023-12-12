@@ -27,17 +27,16 @@
              <title>Costa Occidental PBC</title>
          </head>
          <body>
-             <div class="navegacion">
+            <div class="navegacion">
                  <a href="https://www.gob.mx/agricultura" target="_blank"><img class="logo-agricultura" src="../../fig/agricultura2.png" alt=" Logotipo de Agricultura"></a> 
                   <ul>
                      <li><a href="../../geopesca.html">Geoportal del INAPESCA-GEOPESCA </a></li>
                      <li><a href="../../index.html"> B/I Dr. Jorge Carranza Fraser </a></li>
                   </ul>
                  <a href="https://www.gob.mx/inapesca/" target="_blank"><img class="logo-inapesca" src="../../fig/inapesca2.png" alt=" Logotipo de Inapesca"></a> 
-              </div>
+            </div>
          <div id="map">
              <img class="paletas" src="../../fig/2019_2021_GC.svg" alt="Paletas de colores de variables ambientales">
-             
          </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
@@ -95,7 +94,7 @@
         var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             pane: 'pane_OSMStandard_0',
             opacity: 1.0,
-            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
@@ -108,7 +107,7 @@
         var layer_GooglecnNormal_1 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}', {
             pane: 'pane_GooglecnNormal_1',
             opacity: 1.0,
-            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">地图数据 ©2016 Google</a>',
+            attribution: '<a href="https://www.google.com/intl/zh-CN_cn/permissions/geoguidelines/attr-guide.html">©2016 Google</a>',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
@@ -420,6 +419,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <th scope="row">Foto</th>\
                         <td>' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
@@ -490,6 +493,10 @@
                     <tr>\
                         <th scope="row">Estación</th>\
                         <td>' + (feature.properties['Estación'] !== null ? autolinker.link(feature.properties['Estación'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/inapesca/acciones-y-programas/campana-oceano-pacifico-2022 target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
