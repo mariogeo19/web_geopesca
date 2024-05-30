@@ -348,6 +348,10 @@
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/imipas/documentos/mision-cientifica-clipperton-2019-isla-de-la-passion-france target=_blank><b>ver</b></i></a></td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Imagen'] !== null ? '<img src="images/' + String(feature.properties['Imagen']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -417,6 +421,10 @@
                     <tr>\
                         <th scope="row">Clave</th>\
                         <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Informe</th>\
+                        <td colspan="2"> <a href= https://www.gob.mx/imipas/documentos/mision-cientifica-clipperton-2019-isla-de-la-passion-france target=_blank><b>ver</b></i></a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
