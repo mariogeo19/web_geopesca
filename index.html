@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!--ESTILOS DEL GOBIERNO-->
-    <link href="https://framework-gb.cdn.gob.mx/gm/v4/css/main.css" rel="stylesheet">
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
     <link href="https://framework-gb.cdn.gob.mx/gm/v4/image/favicon.ico" rel="shortcut icon">
 
     <!--ESTILO PROPIO-->
@@ -19,37 +19,38 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-light sub-navbar navbar-fixed-top">
+    <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
         <div class="container">
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarDropdown" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand sub-navbar" href="https://www.gob.mx/imipas" target="_blank">IMIPAS</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+              <span class="sr-only">Interruptor de Navegación</span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.gob.mx/imipas" target="_blank">IMIPAS</a>
+          </div>
 
-            <div class="collapse navbar-collapse" id="subNavBarDropdown">
-                <ul class="navbar-nav">
+          <div class="collapse navbar-collapse" id="subenlaces">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="#">Inicio</a>
+              </li>
+              <li>
+                <a href="https://www.gob.mx/imipas/acciones-y-programas/buque-de-investigacion-dr-jorge-carranza-fraser-362964" target="_blank">Informes y publicaciones</a>
+              </li>
+              <li>
+                <a href="geopesca.html">Geopesca</a>
+              </li>
+              <li>
+                <a href="https://sites.google.com/inapesca.gob.mx/vinculacion/siga" target="_blank">SIGA</a>
+              </li>
+              <li>
+                <a href="https://www.gob.mx/imipas#4436" target="_blank">Contacto</a>
+              </li>
 
-                    <li class="nav-item">
-                    <a class="nav-link subnav-link" href="#">Inicio</a>
-                    </li>
-
-                    <li class="nav-item">
-                    <a class="nav-link subnav-link" href="https://acortar.link/M8jTLP" target="_blank">Informes y publicaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link subnav-link" href="geopesca.html">Geopesca</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link subnav-link" href="https://sites.google.com/inapesca.gob.mx/vinculacion/siga" target="_blank">SIGA</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link subnav-link" href="https://www.gob.mx/imipas#4436" target="_blank">Contacto</a>
-                    </li>
-                    
-                </ul>
-            </div>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
 
     <div class="container">
         <!--Imagen principal (BI Jorge Carranza)-->
@@ -171,7 +172,7 @@
 
     
 <!--JS DEL GOBIERNO DE MEXICO-->
-    <script src="https://framework-gb.cdn.gob.mx/gm/v4/js/gobmx.js"></script>
+<script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
    
     
 </body>

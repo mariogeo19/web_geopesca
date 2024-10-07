@@ -12,7 +12,7 @@ body {
 
 .fig_main {
     width: 100%;
-    padding-top: 40px;
+    padding-top: 50px;
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
